@@ -36,12 +36,19 @@ a {
 .background-image {
   position: absolute;
   inset: -6rem;
+  will-change: transform;
+  transform: translateY(0px);
+}
+
+.background-ken {
+  position: absolute;
+  inset: 0;
   background-image: url("images/ocean_bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   will-change: transform;
-  transform: scale(1) translateY(0px);
+  animation: ken-burns 22s ease-in-out infinite alternate;
 }
 
 .background-overlay {
@@ -185,7 +192,7 @@ a {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  transition: transform 0.3s ease-out, background-color 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease-out, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .btn.magnetic {
@@ -320,7 +327,7 @@ a {
 }
 
 .mission-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-12px) scale(1.02);
   border-color: hsl(var(--foreground) / 0.2);
   background: hsl(var(--foreground) / 0.08);
 }
@@ -487,41 +494,57 @@ cite {
 
 .reveal {
   --reveal-x: 0px;
-  --reveal-y: 2rem;
+  --reveal-y: 2.5rem;
+  --reveal-scale: 0.92;
+  --reveal-rotate: 0deg;
   opacity: 0;
-  transform: translate3d(var(--reveal-x), var(--reveal-y), 0);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+  filter: blur(8px);
+  transform: translate3d(var(--reveal-x), var(--reveal-y), 0)
+    scale(var(--reveal-scale))
+    rotate(var(--reveal-rotate));
+  transition:
+    opacity 0.95s ease,
+    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.95s ease;
+  will-change: opacity, transform, filter;
 }
 
 .reveal-left {
-  --reveal-x: -4rem;
+  --reveal-x: -6rem;
   --reveal-y: 0px;
+  --reveal-scale: 0.9;
+  --reveal-rotate: -2deg;
 }
 
 .reveal-right {
-  --reveal-x: 4rem;
+  --reveal-x: 6rem;
   --reveal-y: 0px;
+  --reveal-scale: 0.9;
+  --reveal-rotate: 2deg;
 }
 
 .reveal-up {
   --reveal-x: 0px;
-  --reveal-y: 2rem;
+  --reveal-y: 3.5rem;
+  --reveal-scale: 0.94;
 }
 
 .reveal-up-strong {
   --reveal-x: 0px;
-  --reveal-y: 3rem;
+  --reveal-y: 5rem;
+  --reveal-scale: 0.9;
 }
 
 .reveal-down {
   --reveal-x: 0px;
-  --reveal-y: -2rem;
+  --reveal-y: -3.5rem;
+  --reveal-scale: 0.94;
 }
 
 .reveal.show {
   opacity: 1;
-  transform: translate3d(0px, 0px, 0px);
+  filter: blur(0);
+  transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -546,6 +569,20 @@ cite {
   50% {
     transform: translateY(0);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.06) translate3d(0%, 0%, 0);
+  }
+
+  50% {
+    transform: scale(1.13) translate3d(-1.5%, -1%, 0);
+  }
+
+  100% {
+    transform: scale(1.2) translate3d(1.5%, 1%, 0);
   }
 }
 

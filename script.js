@@ -41,8 +41,8 @@ const initMagneticButtons = () => {
       const rect = button.getBoundingClientRect();
       const x = event.clientX - rect.left - rect.width / 2;
       const y = event.clientY - rect.top - rect.height / 2;
-      position.x = x * 0.15;
-      position.y = y * 0.15;
+      position.x = x * 0.24;
+      position.y = y * 0.24;
 
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(render);
@@ -74,7 +74,7 @@ const updateScrollEffects = () => {
     );
     const progress = Math.min(y / scrollableHeight, 1);
     const parallax = progress * 320;
-    backgroundImage.style.transform = `scale(1.08) translateY(${parallax}px)`;
+    backgroundImage.style.transform = `translateY(${parallax - 120}px)`;
   }
 };
 
